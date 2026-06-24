@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(find . -path ./node_modules -prune -o -type f -size +40M -print)",
+      "Bash(du -sh --exclude=node_modules --exclude=.next --exclude=.git .)",
+      "Bash(git add *)"
+    ]
+  }
+}

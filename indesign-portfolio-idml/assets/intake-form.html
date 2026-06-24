@@ -1,0 +1,227 @@
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Interactive intake form for an InDesign portfolio template: prefill controls, cover, contact, and project sections with title, subtitle, description, captions, and per-slot image pickers that capture filenames, plus an add-project button.</h2>
+
+<div style="padding:1rem 0; display:flex; flex-direction:column; gap:1rem;">
+
+  <div style="display:flex; align-items:center; gap:10px;">
+    <i class="ti ti-layout-board-split" style="font-size:22px; color:var(--color-text-secondary)" aria-hidden="true"></i>
+    <div>
+      <div style="font-size:18px; font-weight:500;">Portfolio intake</div>
+      <div style="font-size:13px; color:var(--color-text-tertiary)">Fill what you have — every field is optional. Pick an image per slot; you'll re-drop those files in chat to build.</div>
+    </div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:var(--color-background-secondary); padding:10px 12px; border-radius:var(--border-radius-md);">
+    <span style="font-size:13px; color:var(--color-text-secondary); display:flex; align-items:center; gap:6px;"><i class="ti ti-wand" style="font-size:16px" aria-hidden="true"></i>Prefill</span>
+    <div id="prefill" style="display:flex; gap:6px;">
+      <button type="button" data-mode="mine" style="font-size:13px; padding:5px 12px;">My details</button>
+      <button type="button" data-mode="example" style="font-size:13px; padding:5px 12px;">Example</button>
+      <button type="button" data-mode="blank" style="font-size:13px; padding:5px 12px;">Blank</button>
+    </div>
+    <span style="font-size:11px; color:var(--color-text-tertiary)">Replaces text entries</span>
+  </div>
+
+  <div id="formbody"></div>
+
+  <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+    <button id="add" type="button" style="font-size:13px;"><i class="ti ti-plus" style="font-size:15px; vertical-align:-2px" aria-hidden="true"></i> Add project</button>
+    <span style="font-size:11px; color:var(--color-text-tertiary)">Projects beyond D need a duplicated spread in InDesign (see adding-projects.md).</span>
+  </div>
+
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; border-top:0.5px solid var(--color-border-tertiary); padding-top:1rem;">
+    <div style="font-size:12px; color:var(--color-text-tertiary); display:flex; align-items:center; gap:6px;">
+      <i class="ti ti-upload" style="font-size:15px" aria-hidden="true"></i>
+      On generate I'll list the exact files to drop into chat.
+    </div>
+    <button id="gen" type="button" style="font-weight:500;">Generate portfolio data ↗</button>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var KEYS=["A","B","C","D","E","F","G","H","I","J"];
+  var TEMPLATE=[{images:2,captions:2},{images:2,captions:2},{images:2,captions:2},{images:2,captions:3}];
+
+  var EXAMPLE={
+    cover:{title:"Portfolio",subtitle:"Bachelor of Architecture\nUTS · Ali Almusawi"},
+    contact:"ali-mosey@hotmail.com\n0469798091",
+    projects:[
+      {title:"Riverside Cultural Centre",subtitle:"Sydney\n2025",description:"A civic building organised around a public atrium, mediating between the river edge and the town square.",caps:["Approach from the square","Atrium section"]},
+      {title:"Community Hall",subtitle:"St John's Wood\n2024",description:"A flexible timber hall serving the surrounding development, with operable walls that open onto a shared garden.",caps:["Main hall","Garden elevation"]},
+      {title:"Materiality",subtitle:"Self-Initiated Project",description:"An exploration of weathering and tactility across rammed earth, board-formed concrete, and oxidised steel.",caps:["Material study","Detail"]},
+      {title:"Liverpool Maritime Museum",subtitle:"Proposal\n2023",description:"A waterfront museum threading galleries along a public promenade, framing views back to the historic docks.",caps:["Promenade","Gallery","Dock view"]}
+    ]
+  };
+  var MINE={cover:{title:"Portfolio",subtitle:"Bachelor of Architecture\nUTS · Ali Almusawi"},contact:"ali-mosey@hotmail.com\n0469798091"};
+
+  var model=null;
+  function blankModel(){
+    return {
+      cover:{title:"",subtitle:"",heroName:"",heroPrev:""},
+      contact:"",
+      projects:TEMPLATE.map(function(t,i){
+        return {key:KEYS[i],images:t.images,captions:t.captions,locked:true,title:"",subtitle:"",description:"",
+                caps:Array(t.captions).fill(""),heroName:"",heroPrev:"",imgNames:Array(t.images).fill(""),imgPrev:Array(t.images).fill("")};
+      })
+    };
+  }
+  function applyPrefill(mode){
+    var m=blankModel();
+    if(mode==="mine"){m.cover.title=MINE.cover.title;m.cover.subtitle=MINE.cover.subtitle;m.contact=MINE.contact;}
+    else if(mode==="example"){
+      m.cover.title=EXAMPLE.cover.title;m.cover.subtitle=EXAMPLE.cover.subtitle;m.contact=EXAMPLE.contact;
+      m.projects.forEach(function(p,i){var e=EXAMPLE.projects[i];if(!e)return;p.title=e.title;p.subtitle=e.subtitle;p.description=e.description;p.caps=e.caps.slice(0,p.captions);while(p.caps.length<p.captions)p.caps.push("");});
+    }
+    model=m;render();
+  }
+  function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  function collect(){
+    if(!model)return;
+    var ct=document.getElementById("cover_title");if(ct)model.cover.title=ct.value;
+    var cs=document.getElementById("cover_subtitle");if(cs)model.cover.subtitle=cs.value;
+    var cc=document.getElementById("contact");if(cc)model.contact=cc.value;
+    model.projects.forEach(function(p){
+      var t=document.querySelector('[data-t="'+p.key+'"]');if(t)p.title=t.value;
+      var s=document.querySelector('[data-s="'+p.key+'"]');if(s)p.subtitle=s.value;
+      var d=document.querySelector('[data-d="'+p.key+'"]');if(d)p.description=d.value;
+      var caps=[];document.querySelectorAll('[data-cap="'+p.key+'"]').forEach(function(c){caps.push(c.value);});
+      if(caps.length)p.caps=caps;
+    });
+  }
+
+  function getState(kind,key,idx){
+    if(kind==="coverhero")return {name:model.cover.heroName,prev:model.cover.heroPrev};
+    var p=model.projects.find(function(x){return x.key===key;});if(!p)return {name:"",prev:""};
+    if(kind==="hero")return {name:p.heroName,prev:p.heroPrev};
+    return {name:p.imgNames[idx]||"",prev:p.imgPrev[idx]||""};
+  }
+  function setImg(kind,key,idx,name,prev){
+    if(kind==="coverhero"){model.cover.heroName=name;model.cover.heroPrev=prev;return;}
+    var p=model.projects.find(function(x){return x.key===key;});if(!p)return;
+    if(kind==="hero"){p.heroName=name;p.heroPrev=prev;return;}
+    p.imgNames[idx]=name;p.imgPrev[idx]=prev;
+  }
+  function slotLabel(kind,idx){return kind==="coverhero"?"Cover hero":(kind==="hero"?"Hero":"Image "+(idx+1));}
+  function slotInner(st,label){
+    if(st.name){
+      return '<div style="display:flex;align-items:center;gap:8px;background:var(--color-background-secondary);padding:6px 8px;border-radius:var(--border-radius-md);">'+
+        '<img src="'+st.prev+'" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:4px;flex:none;">'+
+        '<span style="font-size:11px;color:var(--color-text-tertiary);min-width:60px;">'+esc(label)+'</span>'+
+        '<span style="font-size:12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+esc(st.name)+'</span>'+
+        '<button type="button" data-clear aria-label="Remove image" style="padding:2px 6px;font-size:12px;flex:none;"><i class="ti ti-x" style="font-size:14px" aria-hidden="true"></i></button>'+
+      '</div>';
+    }
+    return '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px 10px;font-size:12px;color:var(--color-text-secondary);">'+
+      '<input type="file" accept="image/*" hidden>'+
+      '<i class="ti ti-photo-plus" style="font-size:16px" aria-hidden="true"></i>'+
+      '<span>Add '+esc(label.toLowerCase())+'</span>'+
+    '</label>';
+  }
+  function slot(kind,key,idx){
+    var st=getState(kind,key,idx);
+    return '<div class="imgslot" data-kind="'+kind+'" data-key="'+(key||"")+'" data-idx="'+(idx==null?-1:idx)+'" style="margin-bottom:8px;">'+slotInner(st,slotLabel(kind,idx))+'</div>';
+  }
+  function refreshSlot(el){
+    var kind=el.dataset.kind,key=el.dataset.key,idx=parseInt(el.dataset.idx,10);
+    el.innerHTML=slotInner(getState(kind,key,idx),slotLabel(kind,idx));
+  }
+
+  function render(){
+    var h="";
+    h+='<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem;">'+
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;"><i class="ti ti-book-2" style="font-size:18px;color:var(--color-text-secondary)" aria-hidden="true"></i><span style="font-size:15px;font-weight:500;">Cover &amp; contact</span></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">'+
+        '<label style="font-size:13px;color:var(--color-text-secondary);display:flex;flex-direction:column;gap:4px;">Cover title<input id="cover_title" type="text" placeholder="Portfolio" value="'+esc(model.cover.title)+'"></label>'+
+        '<label style="font-size:13px;color:var(--color-text-secondary);display:flex;flex-direction:column;gap:4px;">Cover subtitle<textarea id="cover_subtitle" rows="2" placeholder="Bachelor of Architecture&#10;UTS · Ali Almusawi" style="resize:vertical">'+esc(model.cover.subtitle)+'</textarea></label>'+
+      '</div>'+
+      '<label style="font-size:13px;color:var(--color-text-secondary);display:flex;flex-direction:column;gap:4px;margin-top:12px;">Contact line<textarea id="contact" rows="2" placeholder="ali-mosey@hotmail.com&#10;0469798091" style="resize:vertical">'+esc(model.contact)+'</textarea></label>'+
+      '<div style="margin-top:12px;font-size:13px;color:var(--color-text-secondary);margin-bottom:6px;">Cover image</div>'+slot("coverhero","",null)+
+    '</div>';
+
+    model.projects.forEach(function(p){
+      var capInputs="";
+      for(var i=0;i<p.captions;i++)capInputs+='<input data-cap="'+p.key+'" type="text" placeholder="Caption '+(i+1)+'" value="'+esc(p.caps[i]||"")+'" style="margin-bottom:8px;">';
+      var imgSlots=slot("hero",p.key,null);
+      for(var j=0;j<p.images;j++)imgSlots+=slot("img",p.key,j);
+      var removeBtn=p.locked?"":'<button type="button" data-remove="'+p.key+'" aria-label="Remove project" style="margin-left:auto;padding:2px 8px;font-size:12px;"><i class="ti ti-trash" style="font-size:14px" aria-hidden="true"></i></button>';
+      var newTag=p.locked?"":'<span style="font-size:11px;color:var(--color-text-warning);background:var(--color-background-warning);padding:2px 8px;border-radius:var(--border-radius-md);">needs new spread</span>';
+      h+='<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem;">'+
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">'+
+          '<span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--color-background-info);color:var(--color-text-info);font-size:13px;font-weight:500;">'+p.key+'</span>'+
+          '<span style="font-size:15px;font-weight:500;">Project '+p.key+'</span>'+newTag+removeBtn+
+        '</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">'+
+          '<label style="font-size:13px;color:var(--color-text-secondary);display:flex;flex-direction:column;gap:4px;">Title<input data-t="'+p.key+'" type="text" value="'+esc(p.title)+'"></label>'+
+          '<label style="font-size:13px;color:var(--color-text-secondary);display:flex;flex-direction:column;gap:4px;">Subtitle (location / year)<textarea data-s="'+p.key+'" rows="2" style="resize:vertical">'+esc(p.subtitle)+'</textarea></label>'+
+        '</div>'+
+        '<label style="font-size:13px;color:var(--color-text-secondary);display:flex;flex-direction:column;gap:4px;margin-top:12px;">Description<textarea data-d="'+p.key+'" rows="3" placeholder="Body paragraph describing the project…" style="resize:vertical">'+esc(p.description)+'</textarea></label>'+
+        '<div style="margin-top:12px;font-size:13px;color:var(--color-text-secondary);margin-bottom:4px;">Captions</div>'+capInputs+
+        '<div style="margin-top:8px;font-size:13px;color:var(--color-text-secondary);margin-bottom:6px;">Images</div>'+imgSlots+
+      '</div>';
+    });
+
+    document.getElementById("formbody").innerHTML=h;
+  }
+
+  var fb=document.getElementById("formbody");
+  fb.addEventListener("change",function(e){
+    var inp=e.target;
+    if(!(inp.matches&&inp.matches('input[type="file"]')))return;
+    var el=inp.closest(".imgslot");if(!el)return;
+    var file=inp.files&&inp.files[0];if(!file)return;
+    var rd=new FileReader();
+    rd.onload=function(){setImg(el.dataset.kind,el.dataset.key,parseInt(el.dataset.idx,10),file.name,rd.result);refreshSlot(el);};
+    rd.readAsDataURL(file);
+  });
+  fb.addEventListener("click",function(e){
+    var c=e.target.closest("[data-clear]");
+    if(c){var el=c.closest(".imgslot");setImg(el.dataset.kind,el.dataset.key,parseInt(el.dataset.idx,10),"","");refreshSlot(el);return;}
+    var r=e.target.closest("[data-remove]");
+    if(r){collect();var k=r.getAttribute("data-remove");model.projects=model.projects.filter(function(p){return p.key!==k;});render();}
+  });
+
+  document.getElementById("prefill").addEventListener("click",function(e){var b=e.target.closest("[data-mode]");if(b)applyPrefill(b.getAttribute("data-mode"));});
+  document.getElementById("add").addEventListener("click",function(){
+    collect();
+    var used=model.projects.map(function(p){return p.key;});
+    var nk=KEYS.find(function(k){return used.indexOf(k)<0;})||("P"+(model.projects.length+1));
+    model.projects.push({key:nk,images:2,captions:2,locked:false,title:"",subtitle:"",description:"",caps:["",""],heroName:"",heroPrev:"",imgNames:["",""],imgPrev:["",""]});
+    render();
+  });
+
+  document.getElementById("gen").addEventListener("click",function(){
+    collect();
+    var out={},assigned=[],missing=[];
+    var cover={};
+    if(model.cover.title.trim())cover.title=model.cover.title.trim();
+    if(model.cover.subtitle.trim())cover.subtitle=model.cover.subtitle.trim();
+    if(model.cover.heroName){cover.hero_image=model.cover.heroName;assigned.push(model.cover.heroName+"  → cover hero");}else{missing.push("Cover hero");}
+    if(Object.keys(cover).length)out.cover=cover;
+    if(model.contact.trim())out.contact=model.contact.trim();
+    out.projects={};
+    var extras=[];
+    model.projects.forEach(function(p){
+      var o={};
+      if(p.title.trim())o.title=p.title.trim();
+      if(p.subtitle.trim())o.subtitle=p.subtitle.trim();
+      if(p.description.trim())o.description=p.description.trim();
+      var caps=p.caps.map(function(c){return (c||"").trim();}).filter(Boolean);if(caps.length)o.captions=caps;
+      if(p.heroName){o.hero_image=p.heroName;assigned.push(p.heroName+"  → "+p.key+" hero");}else{missing.push("Project "+p.key+" hero");}
+      var imgs=[];
+      for(var i=0;i<p.images;i++){var n=(p.imgNames[i]||"").trim();if(n){imgs.push(n);assigned.push(n+"  → "+p.key+" image "+(i+1));}else{missing.push("Project "+p.key+" image "+(i+1));}}
+      if(imgs.length)o.images=imgs;
+      if(Object.keys(o).length)out.projects[p.key]=o;
+      if(!p.locked)extras.push(p.key);
+    });
+    var json=JSON.stringify(out,null,2);
+    var msg="Here's my portfolio content from the intake form. Build the filled IDML using this projects.json:\n\n```json\n"+json+"\n```\n";
+    if(assigned.length)msg+="\nImage → frame mapping (upload these exact files to chat, then build with --images-dir on the upload folder):\n- "+assigned.join("\n- ")+"\n";
+    if(missing.length)msg+="\nSlots still without an image (optional — leave blank to keep template default):\n- "+missing.join("\n- ")+"\n";
+    if(extras.length)msg+="\nNote: project"+(extras.length>1?"s ":" ")+extras.join(", ")+" "+(extras.length>1?"are":"is")+" beyond the template's A–D slots and need a duplicated spread added in InDesign first (see adding-projects.md).\n";
+    if(window.sendPrompt)sendPrompt(msg);
+  });
+
+  applyPrefill("mine");
+})();
+</script>

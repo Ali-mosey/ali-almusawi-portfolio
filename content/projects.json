@@ -1,0 +1,23 @@
+{
+  "cover": {
+    "title": "Portfolio",
+    "subtitle": "Bachelor of Architecture\nUTS · Ali Almusawi"
+  },
+  "projects": {
+    "A": {
+      "title": "A Place to Pause",
+      "subtitle": "Waterloo Sydney 2025",
+      "description": "This project is a reflection of a social condenser ideal approach of how we can utilise a space in a high urban environment to rekindle an interactive social hub in Waterloo Sydney. We aimed to reinvite a link between natural and urban aspects through the 5 senses throughout the building.",
+      "captions": [
+        "Bringing back the historical aspect of the Waterloo swamp",
+        "Keeping the heritage aspect of the original heritage glass factory facade."
+      ],
+      "hero_image": "magnific_edit-img1-with-one-minima_0pyxB4ZTfW.png",
+      "images": [
+        "West Building .png",
+        "magnific_edit-this-architectural-g_wPQoVHy7EI (1).png"
+      ]
+    }
+  },
+  "contact": "ali-mosey@hotmail.com\n0469798091"
+}

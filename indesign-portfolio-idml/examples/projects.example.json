@@ -1,0 +1,42 @@
+{
+  "cover": {
+    "title": "Portfolio",
+    "subtitle": "Bachelor of Architecture\nUTS · Ali Almusawi",
+    "hero_image": "cover.jpg"
+  },
+  "contact": "ali-mosey@hotmail.com\n0469798091",
+  "projects": {
+    "A": {
+      "title": "Riverside Cultural Centre",
+      "subtitle": "Sydney\n2025",
+      "description": "A civic building organised around a public atrium, mediating between the river edge and the town square. The massing steps down toward the water to preserve sightlines and create shaded terraces.",
+      "captions": ["Approach from the square", "Atrium section"],
+      "hero_image": "a_hero.jpg",
+      "images": ["a_01.jpg"]
+    },
+    "B": {
+      "title": "Community Hall",
+      "subtitle": "St John's Wood\n2024",
+      "description": "A flexible timber hall serving the surrounding development, with operable walls that open onto a shared garden.",
+      "captions": ["Main hall", "Garden elevation"],
+      "hero_image": "b_hero.jpg",
+      "images": ["b_01.jpg", "b_02.jpg"]
+    },
+    "C": {
+      "title": "Materiality",
+      "subtitle": "Self-Initiated Project",
+      "description": "An exploration of weathering and tactility across rammed earth, board-formed concrete, and oxidised steel.",
+      "captions": ["Material study", "Detail"],
+      "hero_image": "c_hero.jpg",
+      "images": ["c_01.jpg", "c_02.jpg"]
+    },
+    "D": {
+      "title": "Liverpool Maritime Museum",
+      "subtitle": "Proposal\n2023",
+      "description": "A waterfront museum threading galleries along a public promenade, framing views back to the historic docks.",
+      "captions": ["Promenade", "Gallery", "Dock view"],
+      "hero_image": "d_hero.jpg",
+      "images": ["d_01.jpg", "d_02.jpg"]
+    }
+  }
+}

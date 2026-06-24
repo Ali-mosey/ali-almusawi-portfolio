@@ -1,0 +1,101 @@
+{
+  "_description": "Maps human-friendly portfolio sections to the Story IDs and image-frame Self IDs of 'Portfolio Architecture Template.idml'. Consumed by build_portfolio.py. If the template is re-saved/re-exported from InDesign, re-run inspect_idml.py and update these IDs.",
+  "cover": {
+    "title_story": "u168",
+    "subtitle_story": "u17e",
+    "hero_frame": "u166"
+  },
+  "contact": {
+    "story": "u52f"
+  },
+  "contents": {
+    "heading_story": "u207",
+    "entries": [
+      {
+        "label_story": "u1af",
+        "page_story": "u1db",
+        "project": "A"
+      },
+      {
+        "label_story": "u1c5",
+        "page_story": "u1f1",
+        "project": "B"
+      },
+      {
+        "label_story": "u21f",
+        "page_story": "u24b",
+        "project": "C"
+      },
+      {
+        "label_story": "u235",
+        "page_story": "u261",
+        "project": "D"
+      }
+    ],
+    "thumb_frames": {
+      "A": "u1ac",
+      "B": "u1ad",
+      "C": "u21c",
+      "D": "u21d"
+    }
+  },
+  "projects": {
+    "A": {
+      "title_story": "u286",
+      "subtitle_story": "u29c",
+      "body_story": "u2b2",
+      "caption_stories": [
+        "u2de",
+        "u2f4"
+      ],
+      "hero_frame": "u283",
+      "image_frames": [
+        "u284",
+        "u5bd"
+      ]
+    },
+    "B": {
+      "title_story": "u321",
+      "subtitle_story": "u337",
+      "body_story": "u34d",
+      "caption_stories": [
+        "u38f",
+        "u3a5"
+      ],
+      "hero_frame": "u31d",
+      "image_frames": [
+        "u31e",
+        "u31f"
+      ]
+    },
+    "C": {
+      "title_story": "u3f5",
+      "subtitle_story": "u40b",
+      "body_story": "u3c9",
+      "caption_stories": [
+        "u421",
+        "u437"
+      ],
+      "hero_frame": "u3c6",
+      "image_frames": [
+        "u3c5",
+        "u3c7"
+      ]
+    },
+    "D": {
+      "title_story": "u45d",
+      "subtitle_story": "u473",
+      "body_story": "u489",
+      "caption_stories": [
+        "u4e1",
+        "u4f7",
+        "u50d"
+      ],
+      "hero_frame": "u459",
+      "image_frames": [
+        "u45a",
+        "u45b"
+      ]
+    }
+  }
+}
