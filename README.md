@@ -119,7 +119,7 @@ Indesign Folder/
 
 ```jsonc
 {
-  "cover":   { "title": "Architectural Portfolio", "subtitle": "Bachelor of Design in Architecture\nUTS · Ali Almusawi" },
+  "cover":   { "title": "Portfolio", "subtitle": "Bachelor of Design in Architecture\nUTS · Ali Almusawi" },
   "projects": {
     "A": {
       "title": "A Place to Pause",
@@ -184,7 +184,7 @@ npm run sync -- "<idml>" -m "message"  # custom commit message
 | Desktop "Publish Portfolio" shortcut | ✅ Created |
 | Git + private GitHub repo | ✅ Pushed |
 | Vercel auto-deploy | ✅ Live |
-| Projects | Project A live; **B / C / D empty placeholders** (need images + text) |
+| Projects | **A, B, C live** (A Place to Pause · Intimate Classrooms · Maybe Spaces). Project D still an empty placeholder (needs images + text). |
 
 ## Possible next steps
 
