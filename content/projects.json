@@ -1,7 +1,7 @@
 {
   "cover": {
-    "title": "Architectural Portfolio",
-    "subtitle": "Bachelor of Design in Architecture\nUTS · Ali Almusawi"
+    "title": "Portfolio",
+    "subtitle": "Bachelor of Architecture\nUTS · Ali Almusawi"
   },
   "projects": {
     "A": {
@@ -16,6 +16,33 @@
       "images": [
         "West Building .png",
         "magnific_edit-this-architectural-g_wPQoVHy7EI (1).png"
+      ]
+    },
+    "B": {
+      "title": "Intimate Classrooms",
+      "subtitle": "Waterloo Sydney 2025",
+      "description": "This project is a reflection of utilising the depiction of different styles of teachings on how it can be navigated through architecture. The aim of this design is to produce small intimate classrooms in an interconnected design that provides an isolated surroundings for the students from the urban green square environment without removing the sense of freedom within the students.",
+      "captions": [
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant.",
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos."
+      ],
+      "hero_image": "magnific_edit-img1-a-photorealisti_po6g6j9ehw.png",
+      "images": [
+        "reference-img1.jpeg"
+      ]
+    },
+    "C": {
+      "title": "Maybe Spaces",
+      "subtitle": "Materiality:\nSelf-Initiated Project",
+      "description": "Redefining the concept of student housing and creating spaces that can leads students to have fulfilling and adventurous housing options. Its laid out through personality traits and interactions between people",
+      "captions": [
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant.",
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant."
+      ],
+      "hero_image": "Studio 4 Final Student Housing Project_Page_4.png",
+      "images": [
+        "Studio 4 Final Student Housing Project_Page_1.png",
+        "Studio 4 Final Student Housing Project_Page_5.png"
       ]
     }
   },
