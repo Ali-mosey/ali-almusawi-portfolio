@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getSiteContent } from "@/lib/projects";
+import ProjectTile from "@/components/ProjectTile";
 
 export default function HomePage() {
   const { cover, projects } = getSiteContent();
@@ -12,22 +12,8 @@ export default function HomePage() {
       </section>
 
       <section className="grid">
-        {projects.map((project) => (
-          <Link
-            key={project.slug}
-            href={`/projects/${project.slug}`}
-            className="tile"
-          >
-            <div className="frame">
-              {project.hero && (
-                <img src={project.hero.src} alt={project.title} />
-              )}
-            </div>
-            <div className="caption">
-              <h2>{project.title}</h2>
-              {project.subtitle && <span>{project.subtitle}</span>}
-            </div>
-          </Link>
+        {projects.map((project, i) => (
+          <ProjectTile key={project.slug} project={project} withCat={i === 0} />
         ))}
       </section>
     </div>

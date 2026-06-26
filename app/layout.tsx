@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getSiteContent } from "@/lib/projects";
+import BouncingBuilding from "@/components/BouncingBuilding";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,10 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <BouncingBuilding />
+
         <header className="site-header container">
-          <Link href="/" className="brand">
-            {cover.title}
-          </Link>
           <div className="meta">{cover.subtitle}</div>
         </header>
 

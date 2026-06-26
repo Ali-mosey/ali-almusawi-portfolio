@@ -99,6 +99,7 @@ img {
 
 .tile {
   display: block;
+  position: relative;
 }
 
 .tile .frame {
@@ -113,6 +114,119 @@ img {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+}
+
+/* ---------- Hover ripple on project images ---------- */
+.tile .frame .ripple {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: ripple 0.9s ease-out forwards;
+  z-index: 2;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(18);
+    opacity: 0;
+  }
+}
+
+/* ---------- Sleeping cat ---------- */
+.sleeping-cat {
+  position: absolute;
+  right: 9%;
+  top: 0;
+  width: 104px;
+  /* lift the cat so its "wall edge" line (y=55 of 90) sits on the image top */
+  transform: translateY(-54%);
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.28));
+}
+
+.sleeping-cat svg {
+  width: 100%;
+  height: auto;
+}
+
+.sleeping-cat .cat-body {
+  transform-origin: 58px 55px;
+  animation: cat-breathe 3.2s ease-in-out infinite;
+}
+
+.sleeping-cat .cat-leg {
+  transform-origin: 44px 50px;
+  animation: cat-leg-sway 3.6s ease-in-out infinite;
+}
+
+.sleeping-cat .cat-zzz {
+  animation: cat-zzz 3.2s ease-in-out infinite;
+}
+
+@keyframes cat-leg-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes cat-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.05);
+  }
+}
+
+@keyframes cat-zzz {
+  0% {
+    opacity: 0;
+    transform: translate(0, 4px);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(6px, -8px);
+  }
+}
+
+/* ---------- Bouncing highrise ---------- */
+.bouncing-building {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 104px;
+  z-index: 50;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sleeping-cat .cat-body,
+  .sleeping-cat .cat-leg,
+  .sleeping-cat .cat-zzz {
+    animation: none;
+  }
 }
 
 .tile:hover .frame img {
