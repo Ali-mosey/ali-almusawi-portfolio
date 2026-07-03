@@ -116,3 +116,11 @@ export function getNextProject(slug: string): Project | undefined {
   if (i === -1) return undefined;
   return all[(i + 1) % all.length];
 }
+
+/** The previous project in the list, without wrapping (the first project has none). */
+export function getPreviousProject(slug: string): Project | undefined {
+  const all = getAllProjects();
+  const i = all.findIndex((p) => p.slug === slug);
+  if (i <= 0) return undefined;
+  return all[i - 1];
+}
