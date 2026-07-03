@@ -39,6 +39,14 @@ export default async function ProjectPage({
 
   return (
     <article className="container">
+      {project.background && (
+        <div
+          className="project-bg"
+          style={{ backgroundImage: `url(${project.background.src})` }}
+          aria-hidden="true"
+        />
+      )}
+
       <Link href="/" className="back">
         ← All projects
       </Link>

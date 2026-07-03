@@ -157,15 +157,19 @@ function readSpread(xml) {
     if (!storyIds.includes(m[1])) storyIds.push(m[1]);
   }
   const images = [];
+  const backgrounds = [];
   const ire = /LinkResourceURI="([^"]+)"/g;
   while ((m = ire.exec(xml)) !== null) {
     const name = path.basename(uriToLocalPath(m[1]));
-    // Decorative page backgrounds (e.g. watercolour textures) are layout
-    // dressing, not project content — keep them out of hero/gallery.
-    if (/background/i.test(name)) continue;
+    // Page backgrounds (e.g. watercolour textures) become the web page's
+    // background rather than hero/gallery content. Matched by filename.
+    if (/background/i.test(name)) {
+      backgrounds.push(name);
+      continue;
+    }
     images.push(name);
   }
-  return { storyIds, images, raw: xml };
+  return { storyIds, images, backgrounds, raw: xml };
 }
 
 // --------------------------------------------------------------------------
@@ -209,11 +213,15 @@ function buildContent({ stories, spreads, designmap }, existing) {
         description: styledStories(sp, STYLE.body).map((s) => s.text).join("\n\n"),
         captions: styledStories(sp, STYLE.caption).map((s) => s.text),
         images: [...sp.images],
+        background: sp.backgrounds[0] ?? "",
       };
       projects.push(current);
     } else if (current && sp.images.length) {
       current.images.push(...sp.images);
       current.captions.push(...styledStories(sp, STYLE.caption).map((s) => s.text));
+      if (!current.background && sp.backgrounds.length) {
+        current.background = sp.backgrounds[0];
+      }
     }
   }
 
@@ -234,6 +242,7 @@ function buildContent({ stories, spreads, designmap }, existing) {
       captions: p.captions,
       hero_image: hero,
       images: gallery,
+      background_image: p.background,
     };
   });
 
@@ -288,6 +297,7 @@ function copyImages(content, idmlPath, linkPaths) {
   const wanted = new Set();
   for (const p of Object.values(content.projects)) {
     if (p.hero_image) wanted.add(p.hero_image);
+    if (p.background_image) wanted.add(p.background_image);
     for (const img of p.images) wanted.add(img);
   }
   const copied = [];

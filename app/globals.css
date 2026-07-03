@@ -255,6 +255,24 @@ img {
 }
 
 /* ---------- Project page ---------- */
+/* Full-page backdrop from InDesign's page background image. A translucent
+   white veil keeps text and project images readable on top. */
+.project-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+.project-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.72);
+}
+
 .back {
   display: inline-block;
   color: var(--muted);

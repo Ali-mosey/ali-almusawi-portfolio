@@ -13,6 +13,7 @@ type RawProject = {
   captions?: string[];
   hero_image?: string;
   images?: string[];
+  background_image?: string;
 };
 
 type RawContent = {
@@ -35,6 +36,8 @@ export type Project = {
   description?: string;
   hero?: GalleryImage;
   gallery: GalleryImage[];
+  /** Full-page background image for the project's page. */
+  background?: GalleryImage;
 };
 
 export type SiteContent = {
@@ -83,6 +86,7 @@ export function getSiteContent(): SiteContent {
       description: p.description,
       hero: toImageSrc(p.hero_image),
       gallery,
+      background: toImageSrc(p.background_image),
     };
   });
 
