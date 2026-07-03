@@ -159,7 +159,11 @@ function readSpread(xml) {
   const images = [];
   const ire = /LinkResourceURI="([^"]+)"/g;
   while ((m = ire.exec(xml)) !== null) {
-    images.push(path.basename(uriToLocalPath(m[1])));
+    const name = path.basename(uriToLocalPath(m[1]));
+    // Decorative page backgrounds (e.g. watercolour textures) are layout
+    // dressing, not project content — keep them out of hero/gallery.
+    if (/background/i.test(name)) continue;
+    images.push(name);
   }
   return { storyIds, images, raw: xml };
 }
