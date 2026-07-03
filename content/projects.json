@@ -1,6 +1,6 @@
 {
   "cover": {
-    "title": "Architectural Portfolio",
+    "title": "Portfolio",
     "subtitle": "Bachelor of Architecture\nUTS · Ali Almusawi"
   },
   "projects": {
@@ -12,8 +12,9 @@
         "Bringing back the historical aspect of the Waterloo swamp",
         "Keeping the heritage aspect of the original heritage glass factory facade."
       ],
-      "hero_image": "magnific_edit-img1-with-one-minima_0pyxB4ZTfW.png",
+      "hero_image": "abstract-hand-painted-nature-themed-watercolour-background_1048-20695.png",
       "images": [
+        "magnific_edit-img1-with-one-minima_0pyxB4ZTfW.png",
         "West Building .png",
         "magnific_edit-this-architectural-g_wPQoVHy7EI (1).png"
       ]
@@ -23,24 +24,27 @@
       "subtitle": "Waterloo Sydney 2025",
       "description": "This project is a reflection of utilising the depiction of different styles of teachings on how it can be navigated through architecture. The aim of this design is to produce small intimate classrooms in an interconnected design that provides an isolated surroundings for the students from the urban green square environment without removing the sense of freedom within the students.",
       "captions": [
-        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant.",
-        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos."
+        "School hall being a place of privacy but also exploration",
+        "Classroom Clustering to make intimate classroom spaces"
       ],
-      "hero_image": "magnific_edit-img1-a-photorealisti_po6g6j9ehw.png",
+      "hero_image": "orange-watercolor-background_1035-5707.png",
       "images": [
-        "reference-img1.jpeg"
+        "magnific_edit-img1-a-photorealisti_po6g6j9ehw.png",
+        "magnific_img1-is-good-however-i-wa_UykUh3Uwny.png",
+        "classroom_cluster_developed.png"
       ]
     },
     "C": {
       "title": "Maybe Spaces",
-      "subtitle": "Materiality:\nSelf-Initiated Project",
+      "subtitle": "Ultimo Tafe Building 2024",
       "description": "Redefining the concept of student housing and creating spaces that can leads students to have fulfilling and adventurous housing options. Its laid out through personality traits and interactions between people",
       "captions": [
-        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant.",
-        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant."
+        "Game-like aspects encourages social dynamics and community building",
+        "\"central social zone\" are deployed throughout the building to facilitate conversations"
       ],
-      "hero_image": "Studio 4 Final Student Housing Project_Page_4.png",
+      "hero_image": "pngtree-ethereal-watercolor-painting-gray-and-black-abstract-art-background-on-canvas-image_13679727.png",
       "images": [
+        "Studio 4 Final Student Housing Project_Page_4.png",
         "Studio 4 Final Student Housing Project_Page_1.png",
         "Studio 4 Final Student Housing Project_Page_5.png"
       ]
