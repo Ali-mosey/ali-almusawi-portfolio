@@ -1,6 +1,6 @@
 {
   "cover": {
-    "title": "Portfolio",
+    "title": "Architectural Portfolio",
     "subtitle": "Bachelor of Architecture\nUTS · Ali Almusawi"
   },
   "projects": {
@@ -17,37 +17,37 @@
         "West Building .png",
         "magnific_edit-this-architectural-g_wPQoVHy7EI (1).png"
       ],
-      "background_image": "abstract-hand-painted-nature-themed-watercolour-background_1048-20695.png"
+      "background_image": ""
     },
     "B": {
       "title": "Intimate Classrooms",
       "subtitle": "Waterloo Sydney 2025",
       "description": "This project is a reflection of utilising the depiction of different styles of teachings on how it can be navigated through architecture. The aim of this design is to produce small intimate classrooms in an interconnected design that provides an isolated surroundings for the students from the urban green square environment without removing the sense of freedom within the students.",
       "captions": [
-        "School hall being a place of privacy but also exploration",
-        "Classroom Clustering to make intimate classroom spaces"
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant.",
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos."
       ],
-      "hero_image": "magnific_edit-img1-a-photorealisti_po6g6j9ehw.png",
+      "hero_image": "reference-img2.jpeg",
       "images": [
         "magnific_img1-is-good-however-i-wa_UykUh3Uwny.png",
         "classroom_cluster_developed.png"
       ],
-      "background_image": "orange-watercolor-background_1035-5707.png"
+      "background_image": ""
     },
     "C": {
       "title": "Maybe Spaces",
       "subtitle": "Ultimo Tafe Building 2024",
       "description": "Redefining the concept of student housing and creating spaces that can leads students to have fulfilling and adventurous housing options. Its laid out through personality traits and interactions between people",
       "captions": [
-        "Game-like aspects encourages social dynamics and community building",
-        "\"central social zone\" are deployed throughout the building to facilitate conversations"
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant.",
+        "Nam, optio cum sam ende rehenda velisquam, tem aut enit et quo bla ventis eatia derferiam, soluptur simpos ant."
       ],
       "hero_image": "Studio 4 Final Student Housing Project_Page_4.png",
       "images": [
         "Studio 4 Final Student Housing Project_Page_1.png",
         "Studio 4 Final Student Housing Project_Page_5.png"
       ],
-      "background_image": "pngtree-ethereal-watercolor-painting-gray-and-black-abstract-art-background-on-canvas-image_13679727.png"
+      "background_image": ""
     }
   },
   "contact": "ali-mosey@hotmail.com\n0469798091"
